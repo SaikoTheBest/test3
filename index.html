@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Noting</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+    <style>
+        :root {
+            --dark-bg: #1a1a2e;
+            --darker-bg: #16213e;
+            --light-gray: #0f3460;
+            --gold: #e94560;
+            --dark-gold: #53354a;
+            --text-color: #ffffff;
+        }
+
+        body {
+            background: var(--dark-bg);
+            color: var(--text-color);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        footer {
+            background-color: var(--darker-bg);
+            padding: 1rem;
+            text-align: center;
+            margin-top: auto;
+        }
+
+        aside {
+            background-color: var(--light-gray);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .section {
+            background-color: var(--darker-bg);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+            margin-bottom: 1rem;
+        }
+
+        .section-item {
+            height: 100px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+
+        .section-item:last-child {
+            border-bottom: none;
+        }
+
+        .section-item.gold {
+            background-color: var(--gold);
+        }
+
+        .section-item.dark-gold {
+            background-color: var(--dark-gold);
+        }
+
+        @media (min-width: 768px) {
+            aside {
+                height: auto;
+            }
+
+            main {
+                flex-direction: row;
+            }
+        }
+
+        body.dark-mode {
+            background: var(--dark-bg);
+            color: var(--text-color);
+        }
+    </style>
+</head>
+<body>
+    <header class="navbar navbar-dark bg-dark">
+        <div class="container d-flex justify-content-between align-items-center">
+            <a href="#" class="navbar-brand">The Nothing</a>
+            <strong id="time" class="d-none d-md-block"></strong>
+            <button id="themeToggle" class="btn btn-outline-light">Light Mode</button>
+        </div>
+    </header>
+
+    <main class="container-fluid flex-grow-1">
+        <div class="row">
+            <aside class="col-12 col-md-4" aria-label="Aside section">
+                <h3>Th aside</h3>
+                <p>i put my newest news here or a menu</p>
+            </aside>
+            <div class="col-12 col-md-8">
+                <div class="d-flex flex-column">
+                    <section class="section">
+                        <div class="section-item gold">Main 1</div>
+                        <div class="section-item dark-gold">Main 2</div>
+                    </section>
+                    <section class="section">
+                        <div class="section-item dark-gold">Main 3</div>
+                        <div class="section-item dark-gold">Main 4</div>
+                    </section>
+                    <section class="section">
+                        <div class="section-item gold">Main 5</div>
+                        <div class="section-item dark-gold">Main 6</div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="text-white">
+        <div>&copy; 2024 Copyright: <a class="text-white" href="#">Alireza Gohari</a></div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function formatDate(dateObject) {
+            const parts = {
+                year: dateObject.getFullYear(),
+                month: String(dateObject.getMonth() + 1).padStart(2, '0'),
+                date: String(dateObject.getDate()).padStart(2, '0'),
+                hour: String(dateObject.getHours()).padStart(2, '0'),
+                minute: String(dateObject.getMinutes()).padStart(2, '0'),
+                second: String(dateObject.getSeconds()).padStart(2, '0')
+            };
+            return `${parts.year}/${parts.month}/${parts.date} - ${parts.hour}:${parts.minute}:${parts.second}`;
+        }
+
+        const themeToggle = document.getElementById('themeToggle');
+        const timeStamp = document.getElementById('time');
+
+        themeToggle.addEventListener('click', () => {
+            const isDarkMode = document.body.classList.toggle('dark-mode');
+            themeToggle.textContent = isDarkMode ? 'Light Mode' : 'Dark Mode';
+        });
+
+        setInterval(() => {
+            const myDate = new Date();
+            timeStamp.textContent = formatDate(myDate);
+        }, 1000);
+    </script>
+</body>
+</html>
